@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pumpkin Game!</title>
+  <style>
+    body {
+      font-family: Open Sans, Arial;
+      color: #454545;
+      font-size: 16px;
+      margin: 2em auto;
+      max-width: 800px;
+      padding: 1em;
+      line-height: 1.4;
+      text-align: justify
+    }
+
+    html.contrast body {
+      color: #050505
+    }
+
+    html.contrast blockquote {
+      color: #11151a
+    }
+
+    html.contrast blockquote:before {
+      color: #262626
+    }
+
+    html.contrast a {
+      color: #03f
+    }
+
+    html.contrast a:visited {
+      color: #7d013e
+    }
+
+    html.contrast span.wr {
+      color: #800
+    }
+
+    html.contrast span.mfw {
+      color: #4d0000
+    }
+
+    @media screen and (prefers-color-scheme:light) {
+      html.inverted {
+        background-color: #000
+      }
+
+      html.inverted body {
+        color: #d9d9d9
+      }
+
+      html.inverted #contrast,
+      html.inverted #invmode {
+        color: #fff;
+        background-color: #000
+      }
+
+      html.inverted blockquote {
+        color: #d3c9be
+      }
+
+      html.inverted blockquote:before {
+        color: #b8b8b8
+      }
+
+      html.inverted a {
+        color: #00a2e7
+      }
+
+      html.inverted a:visited {
+        color: #ca1a70
+      }
+
+      html.inverted span.wr {
+        color: #d24637
+      }
+
+      html.inverted span.mfw {
+        color: #b00000
+      }
+
+      html.inverted.contrast {
+        background-color: #000
+      }
+
+      html.inverted.contrast body {
+        color: #fff
+      }
+
+      html.inverted.contrast #contrast,
+      html.inverted.contrast #invmode {
+        color: #fff;
+        background-color: #000
+      }
+
+      html.inverted.contrast blockquote {
+        color: #f8f6f5
+      }
+
+      html.inverted.contrast blockquote:before {
+        color: #e5e5e5
+      }
+
+      html.inverted.contrast a {
+        color: #44c7ff
+      }
+
+      html.inverted.contrast a:visited {
+        color: #e9579e
+      }
+
+      html.inverted.contrast span.wr {
+        color: #db695d
+      }
+
+      html.inverted.contrast span.mfw {
+        color: #ff0d0d
+      }
+    }
+
+    @media (prefers-color-scheme:dark) {
+      html:not(.inverted) {
+        background-color: #000
+      }
+
+      html:not(.inverted) body {
+        color: #d9d9d9
+      }
+
+      html:not(.inverted) #contrast,
+      html:not(.inverted) #invmode {
+        color: #fff;
+        background-color: #000
+      }
+
+      html:not(.inverted) blockquote {
+        color: #d3c9be
+      }
+
+      html:not(.inverted) blockquote:before {
+        color: #b8b8b8
+      }
+
+      html:not(.inverted) a {
+        color: #00a2e7
+      }
+
+      html:not(.inverted) a:visited {
+        color: #ca1a70
+      }
+
+      html:not(.inverted) span.wr {
+        color: #d24637
+      }
+
+      html:not(.inverted) span.mfw {
+        color: #b00000
+      }
+
+      html:not(.inverted).contrast {
+        background-color: #000
+      }
+
+      html:not(.inverted).contrast body {
+        color: #fff
+      }
+
+      html:not(.inverted).contrast #contrast,
+      html:not(.inverted).contrast #invmode {
+        color: #fff;
+        background-color: #000
+      }
+
+      html:not(.inverted).contrast blockquote {
+        color: #f8f6f5
+      }
+
+      html:not(.inverted).contrast blockquote:before {
+        color: #e5e5e5
+      }
+
+      html:not(.inverted).contrast a {
+        color: #44c7ff
+      }
+
+      html:not(.inverted).contrast a:visited {
+        color: #e9579e
+      }
+
+      html:not(.inverted).contrast span.wr {
+        color: #db695d
+      }
+
+      html:not(.inverted).contrast span.mfw {
+        color: #ff0d0d
+      }
+
+      html.inverted html {
+        background-color: #fefefe
+      }
+    }
+
+    a {
+      color: #07a
+    }
+
+    a:visited {
+      color: #941352
+    }
+
+    .noselect {
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none
+    }
+
+    span.citneed {
+      vertical-align: top;
+      font-size: .7em;
+      padding-left: .3em
+    }
+
+    small {
+      font-size: .4em
+    }
+
+    p.st {
+      margin-top: -1em
+    }
+
+    div.fancyPositioning div.picture-left {
+      float: left;
+      width: 40%;
+      overflow: hidden;
+      margin-right: 1em
+    }
+
+    div.fancyPositioning div.picture-left img {
+      width: 100%
+    }
+
+    div.fancyPositioning div.picture-left figure {
+      margin: 10px
+    }
+
+    div.fancyPositioning div.picture-left figure figcaption {
+      font-size: .7em
+    }
+
+    div.fancyPositioning div.tleft {
+      float: left;
+      width: 55%
+    }
+
+    div.fancyPositioning div.tleft p:first-child {
+      margin-top: 0
+    }
+
+    div.fancyPositioning:after {
+      display: block;
+      content: "";
+      clear: both
+    }
+
+    ul li img {
+      height: 1em
+    }
+
+    blockquote {
+      color: #456;
+      margin-left: 0;
+      margin-top: 2em;
+      margin-bottom: 2em
+    }
+
+    blockquote span {
+      float: left;
+      margin-left: 1rem;
+      padding-top: 1rem
+    }
+
+    blockquote author {
+      display: block;
+      clear: both;
+      font-size: .6em;
+      margin-left: 2.4rem;
+      font-style: oblique
+    }
+
+    blockquote author:before {
+      content: "- ";
+      margin-right: 1em
+    }
+
+    blockquote:before {
+      font-family: Times New Roman, Times, Arial;
+      color: #666;
+      content: open-quote;
+      font-size: 2.2em;
+      font-weight: 600;
+      float: left;
+      margin-top: 0;
+      margin-right: .2rem;
+      width: 1.2rem
+    }
+
+    blockquote:after {
+      content: "";
+      display: block;
+      clear: both
+    }
+
+    @media screen and (max-width:500px) {
+      body {
+        text-align: left
+      }
+
+      div.fancyPositioning div.picture-left,
+      div.fancyPositioning div.tleft {
+        float: none;
+        width: inherit
+      }
+
+      blockquote span {
+        width: 80%
+      }
+
+      blockquote author {
+        padding-top: 1em;
+        width: 80%;
+        margin-left: 15%
+      }
+
+      blockquote author:before {
+        content: "";
+        margin-right: inherit
+      }
+    }
+
+    span.visited {
+      color: #941352
+    }
+
+    span.visited-maroon {
+      color: #85144b
+    }
+
+    span.wr {
+      color: #c0392b;
+      font-weight: 600
+    }
+
+    button.cont-inv,
+    span.wr {
+      text-decoration: underline
+    }
+
+    button.cont-inv {
+      cursor: pointer;
+      border-radius: 2px;
+      position: fixed;
+      right: 10px;
+      font-size: .8em;
+      border: 0;
+      padding: 2px 5px
+    }
+
+    #contrast {
+      color: #000;
+      top: 10px
+    }
+
+    #contrast,
+    #invmode {
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none
+    }
+
+    #invmode {
+      color: #fff;
+      background-color: #000;
+      position: fixed;
+      top: 34px;
+      text-decoration: underline
+    }
+
+    @media screen and (max-width:1080px) {
+
+      #contrast,
+      #invmode {
+        position: absolute
+      }
+    }
+
+    span.sb {
+      color: #00e
+    }
+
+    span.sb,
+    span.sv {
+      cursor: not-allowed
+    }
+
+    span.sv {
+      color: #551a8b
+    }
+
+    span.foufoufou {
+      color: #444;
+      font-weight: 700
+    }
+
+    span.foufoufou:before {
+      content: "";
+      display: inline-block;
+      width: 1em;
+      height: 1em;
+      margin-left: .2em;
+      margin-right: .2em;
+      background-color: #444
+    }
+
+    span.foufivfoufivfoufiv {
+      color: #454545;
+      font-weight: 700
+    }
+
+    span.foufivfoufivfoufiv:before {
+      content: "";
+      display: inline-block;
+      width: 1em;
+      height: 1em;
+      margin-left: .2em;
+      margin-right: .2em;
+      background-color: #454545
+    }
+
+    span.mfw {
+      color: #730000
+    }
+
+    a.kopimi,
+    a.kopimi img.kopimi {
+      display: block;
+      margin-left: auto;
+      margin-right: auto
+    }
+
+    a.kopimi img.kopimi {
+      height: 2em
+    }
+
+    p.fakepre {
+      font-family: monospace;
+      font-size: .9em
+    }
+  </style>
+  <script defer src="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.js"></script>
+  <link defer type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.css" />
+  <!-- update the version number as needed -->
+  <script defer src="/__/firebase/9.1.3/firebase-app-compat.js"></script>
+  <!-- include only the Firebase features as you need -->
+  <script defer src="/__/firebase/9.1.3/firebase-auth-compat.js"></script>
+  <script defer src="/__/firebase/9.1.3/firebase-firestore-compat.js"></script>
+  <script defer src="/__/firebase/9.1.3/firebase-functions-compat.js"></script>
+
+</head>
+
+<body>
+  <h>Welcome to the pumpkin game!</h>
+  <p><b>If you're prompted to log in after every pumpkin</b>, make sure you open this page in your browser app, NOT in the QR code web view. Also, make sure you're not browsing in private mode.</p>
+  <p>Use <a href="phonetobetter.html">this form</a> to change to email/password authentication, which will prevent you from being locked out before you can complete.</p>
+  <p>First time? Please use email/password authentication, you won't have to fill out a CAPTcha for every login.</p>
+  <div id="authenticate">
+    <a href="privacy.html">Privacy Policy</a>
+    <div id="auth"></div>
+    <h1 id="congrats">
+      </h>
+      <h1 id="list">
+        </h>
+  </div>
+  <div id="prizedat" hidden='true'>
+    <h1>You found enough pumpkins to get your prize!</h1>
+    <h1>Click <a href="prize.html">Here</a> to get it</h1>
+  </div>
+  <script>
+    // Welcome to the source code! Things are look really messy here, I promise you, this isn't my best work!
+    document.addEventListener('DOMContentLoaded', function () {
+      const loadEl = document.querySelector('#load');
+      const firebaseConfig = {
+        apiKey: "AIzaSyDvWBSnymOgPcK6uPduNUIiUVPqBENQ_ok",
+        authDomain: "pumpkin-accbc.firebaseapp.com",
+        projectId: "pumpkin-accbc",
+        storageBucket: "pumpkin-accbc.appspot.com",
+        messagingSenderId: "975234487567",
+        appId: "1:975234487567:web:bea07a394d3ea4a3a81a7a"
+      };
+      try {
+        let app = firebase.initializeApp(firebaseConfig);
+        let features = [
+          'auth',
+          'firestore',
+          'functions',
+        ].filter(feature => typeof app[feature] === 'function');
+      } catch (e) {
+        console.error(e);
+      }
+      let isLoggedIn = false;
+      setTimeout(() => {
+        if (!isLoggedIn) {
+
+          var ui = new firebaseui.auth.AuthUI(firebase.auth());
+          ui.start('#auth', {
+            callbacks: {
+              signInSuccessWithAuthResult: function(authResult, redirectUrl) {return false;},
+            },
+            signInSuccessUrl: "",
+            privacyPolicyUrl: '/privacy.html',
+            signInOptions: [
+              firebase.auth.EmailAuthProvider.PROVIDER_ID,
+              firebase.auth.PhoneAuthProvider.PROVIDER_ID
+            ],
+            // Other config options...
+          });
+        }
+      }, 1000);
+      firebase.auth().onAuthStateChanged((user) => {
+        if (user == null) {
+          return;
+        }
+        console.log(user);
+        isLoggedIn = true;
+        const uid = user.uid;
+        const db = firebase.firestore();
+        const url = new URLSearchParams(window.location.search);
+        if (url.has("t")) {
+          const tag = url.get("t");
+          const docRef = db.collection("users").doc(uid);
+          docRef.get().then(doc => {
+            if (!doc.exists || doc.data()?.["list"] == undefined) {
+              console.log("ahh")
+              document.getElementById("congrats").innerText = "Thanks! You found a pumpkin!";
+            } else {
+              if (doc.data()?.["list"].indexOf(tag) != -1) {
+                document.getElementById("congrats").innerText = "You already found this pumpkin!";
+                document.getElementById("list").innerText = "You have found this many: " + doc.data()["list"].length;
+                if (doc.data()["list"].length >= 12) {
+                  document.getElementById("prizedat").hidden = '';
+                }
+              } else {
+                document.getElementById("congrats").innerText = "Thanks! You found a pumpkin!";
+                document.getElementById("list").innerText = "You have found this many: " + (doc.data()["list"].length + 1);
+                if (doc.data()["list"].length >= 11) {
+                  document.getElementById("prizedat").hidden = '';
+                }
+              }
+
+            }
+
+            if (!doc.exists || doc.data()?.["list"] == undefined || doc.data()?.['name'] == undefined || doc.data()?.['studentid'] == undefined) {
+              let other = {};
+              if (doc.data()?.['name'] == undefined || doc.data()?.['studentid'] == undefined) {
+                let conf = true;
+                while (conf) {
+                  other['name'] = prompt("To continue, enter your full name");
+                  if (other['name'] != null) {
+                    conf = !confirm("Is " + other['name'] + " correct?");
+                  }
+                }
+                conf = true;
+                while (conf) {
+                  other['studentid'] = prompt("To continue, enter your campus email address");
+                  if (other['studentid'] != null) {
+                    conf = !confirm("Is " + other['studentid'] + " correct?");
+                  }
+                }
+              }
+              docRef.set({ ...doc.data(), ...{ list: [tag] }, ...other }).then(() => {
+                console.log("successfully changed to", { ...doc.data(), ...{ list: [tag] }, ...other })
+              }).catch(() => {
+                console.log({ ...doc.data(), ...{ list: [tag] }, ...other });
+                document.getElementById("congrats").innerText = "There was an error adding this pumpkin to your total";
+                document.getElementById("list").innerText = "You have found this many: " + (doc.data()?.["list"]?.length);
+                if (!(doc.data()?.["list"]?.length >= 12)) {
+                  document.getElementById("prizedat").hidden = 'true';
+                }
+              });
+            } else {
+              if (doc.data()["list"].indexOf(tag) == -1) {
+                let arr = doc.data()["list"].slice();
+                arr.push(tag);
+                docRef.set({ ...doc.data(), ...{ list: arr } }).then(() => {
+                  console.log("successfully changed to", { ...doc.data(), ...{ list: arr } })
+                }).catch(() => {
+                  document.getElementById("congrats").innerText = "There was an error adding this pumpkin to your total";
+                  document.getElementById("list").innerText = "You have found this many: " + (doc.data()?.["list"]?.length);
+                  if (!(doc.data()?.["list"]?.length >= 12)) {
+                    document.getElementById("prizedat").hidden = 'true';
+                  }
+                });
+              }
+            }
+
+
+          })
+        }
+        return false;
+      })
+    });
+  </script>
+</body>
+
+</html>

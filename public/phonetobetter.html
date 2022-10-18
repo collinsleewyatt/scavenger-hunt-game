@@ -1,0 +1,53 @@
+<html>
+<script defer src="/__/firebase/9.1.3/firebase-app-compat.js"></script>
+<script defer src="/__/firebase/9.1.3/firebase-auth-compat.js"></script>
+<a id="login" href="/">click here to log in</a>
+<p>Convert to email auth</p>
+<input type='text' placeholder="email" id='email'></input><br>
+<input type='password' placeholder="password" id="password"></input>
+<button onclick="redo()">Submit new authentication</button>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const firebaseConfig = {
+            apiKey: "AIzaSyDvWBSnymOgPcK6uPduNUIiUVPqBENQ_ok",
+            authDomain: "pumpkin-accbc.firebaseapp.com",
+            projectId: "pumpkin-accbc",
+            storageBucket: "pumpkin-accbc.appspot.com",
+            messagingSenderId: "975234487567",
+            appId: "1:975234487567:web:bea07a394d3ea4a3a81a7a"
+        };
+        try {
+            let app = firebase.initializeApp(firebaseConfig);
+            let features = [
+                'auth'
+            ].filter(feature => typeof app[feature] === 'function');
+        } catch (e) {
+            console.error(e);
+        }
+        firebase.auth().onAuthStateChanged((user) => {
+            $("#login").hide();
+        })
+    })
+    function redo() {
+        let email = $("#email").val();
+        let password = $("#password").val();
+        var credential = firebase.auth.EmailAuthProvider.credential(email, password);
+        firebase.auth().currentUser.linkWithCredential(credential)
+            .then((usercred) => {
+                var user = usercred.user;
+                alert("Great! Now use email authentication next time you're logged in to avoid the recaptcha.");
+                window.location = "/";
+            }).catch((error) => {
+                alert("there was an error" + error.message);
+                console.log("Account linking error", error);
+            });
+
+    }
+
+</script>
+
+</html>
